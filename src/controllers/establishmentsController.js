@@ -41,6 +41,9 @@ class EstablishmentsController {
     async create(req, res) {
         await service.create(req.body)
             .then(response => {
+                if(response == null)
+                    return res.status(400).json(new Output("400","Creation Error","O nome é obrigatório e não pode ser repetido"));
+
                 return res.status(200).json(response);
             })
             .catch(error => {
@@ -53,8 +56,9 @@ class EstablishmentsController {
         await service.update(req.body, code)
             .then(response => {
                 if(response == null)
-                        return res.status(400).json(new Output("400","Not Found","O estabelecimento não foi encontrado"));
-
+                    return res.status(400).json(new Output("400","Not Found","O estabelecimento não foi encontrado"));
+                if(response == "Error")
+                    return res.status(400).json(new Output("400","Update Error","O id não pode ser repetido"));
                 return res.status(200).json(response);
             })
             .catch(error => {

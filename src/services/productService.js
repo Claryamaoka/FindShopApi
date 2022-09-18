@@ -1,5 +1,6 @@
 const { response } = require('express');
 const Product = require("../model/product");
+const Validate = require("../services/validationService");
 
 let db = [new Product("1","Banana","Frutas"),new Product("2","Leite","Laticínios")];
 
@@ -18,8 +19,11 @@ class ProductService {
     async create(body){
         if(!body)
             return null;
-        db.push(new Product(body.id,body.name,body.section));
-        return db;
+        if(Validate.validateCreate(body,db)){
+            db.push(new Product(body.id,body.name,body.section));
+            return db;
+        }
+        
     }
 }
 

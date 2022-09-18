@@ -1,5 +1,6 @@
 const { response } = require('express');
 const Establishment = require("../model/establishment");
+const Validate = require("../services/validationService");
 
 let db = [new Establishment("1","Carrefour","Demarchi","https://m3storage.com.br/locais/26-m3storage-carrefour-sao-bernardo-demarchi.html"), new Establishment("2","Bem Barato","Av. Pereira Barreto","https://grupobembarato.com.br/lojas/")];
 
@@ -18,8 +19,11 @@ class EstablishmentService {
     async create(body){
         if(!body)
             return null;
-        db.push(new Establishment(body.id,body.name,body.address,body.image));
-        return db;
+        if(Validate.validateCreate(body,db)){
+            db.push(new Establishment(body.id,body.name,body.address,body.image));        
+            return db;
+        }
+        return null;   
     }
 
     async update(body, code){
@@ -27,6 +31,9 @@ class EstablishmentService {
         if(!res)
             return null;
         
+        if(!Validate.validateUpdate(body,db)){
+            return "Error";
+        }
         var foundIndex = db.findIndex(x => x.id == code);
         db[foundIndex] = new Establishment(body.id,body.name,body.address,body.image);
         return db;
