@@ -8,9 +8,10 @@ class ValidationService{
         return true;
     }
 
-    validateUpdate(obj,db){
+    validateUpdate(code,obj,db){
         if(db.find(x => x.id == obj.id)){
-            return false;
+            if(code != obj.id)
+                return false;
         }
         return true;
     }

@@ -31,7 +31,7 @@ class EstablishmentService {
         if(!res)
             return null;
         
-        if(!Validate.validateUpdate(body,db)){
+        if(!Validate.validateUpdate(code,body,db)){
             return "Error";
         }
         var foundIndex = db.findIndex(x => x.id == code);
