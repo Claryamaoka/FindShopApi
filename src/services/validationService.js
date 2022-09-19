@@ -16,4 +16,4 @@ class ValidationService{
     }
 }
 
-module.exports = ValidationService;
+module.exports = new ValidationService();
