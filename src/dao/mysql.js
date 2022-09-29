@@ -4,7 +4,7 @@ var config =
 {
     host: 'findshop.mysql.database.azure.com',
     user: 'findshop_sa',
-    password: 'Blowhack@2022',
+    password: '???',
     database: 'quickstartdb',
     ssl: true
 };
