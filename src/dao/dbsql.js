@@ -5,7 +5,7 @@ var config = {
         type: 'default',
         options: {
             userName: 'findshop_sa', //update me
-            password: 'Blowhack@2022'  //update me
+            password: 'B???'  //update me
         }
     },
     options: {
